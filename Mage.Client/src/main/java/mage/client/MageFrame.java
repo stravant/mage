@@ -100,7 +100,7 @@ import mage.client.components.MageUI;
 import mage.client.components.ext.dlg.DialogManager;
 import mage.client.components.tray.MageTray;
 import mage.client.constants.Constants.DeckEditorMode;
-import mage.client.deckeditor.DeckEditorPane;
+import mage.client.deckeditorv2.DeckEditorPane;
 import mage.client.deckeditor.collection.viewer.CollectionViewerPane;
 import mage.client.dialog.AboutDialog;
 import mage.client.dialog.ConnectDialog;

@@ -75,6 +75,7 @@ import mage.filter.predicate.mageobject.ColorlessPredicate;
 import mage.filter.predicate.other.CardTextPredicate;
 import mage.filter.predicate.other.ExpansionSetPredicate;
 import mage.view.CardsView;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -384,6 +385,7 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
     private void filterCards() {
         FilterCard filter = buildFilter();
         try {
+            long startTime = System.currentTimeMillis();
             List<Card> filteredCards = new ArrayList<>();
             setCursor(new Cursor(Cursor.WAIT_CURSOR));
             if (limited) {
@@ -404,7 +406,10 @@ public class CardSelector extends javax.swing.JPanel implements ComponentListene
             if (currentView instanceof CardGrid && filteredCards.size() > CardGrid.MAX_IMAGES) {
                 this.toggleViewMode();
             }
+            Logger.getLogger(CardSelector.class).info("Search delay: " + (System.currentTimeMillis() - startTime));
+            startTime = System.currentTimeMillis();
             this.currentView.loadCards(new CardsView(filteredCards), sortSetting, bigCard, null, false);
+            Logger.getLogger(CardSelector.class).info("Display delay: " + (System.currentTimeMillis() - startTime));
             this.cardCount.setText(String.valueOf(filteredCards.size()));
         } finally {
             setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
